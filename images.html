@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense | Images</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="dashboard-body">
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="main.html" class="logo-link">EcoSense</a>
+            </div>
+
+            <nav>
+                <a class="side-link" href="dashboard.html">Dashboard</a>
+                <a class="side-link" href="sensors.html">Sensors</a>
+                <a class="side-link" href="ai.html">AI Prediction</a>
+                <a class="side-link active" href="images.html">Images</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="dashboard-content">
+
+            <h2 class="page-title">Upload Image</h2>
+
+            <div class="img-grid">
+
+                <!-- Upload Card -->
+                <section class="card-block img-card">
+                    <h4>Upload Image</h4>
+
+                    <label class="dropzone" id="dropzone">
+                        <input type="file" id="fileInput" accept="image/*" hidden />
+                        <div class="dz-inner">
+                            <div class="dz-text">Click or Drag Image Here</div>
+                        </div>
+                    </label>
+
+                    <button class="btn btn-solid btn-lg" id="uploadBtn" disabled>Upload</button>
+
+                    <div class="pill tiny" style="margin-top:12px;">POST /images/upload</div>
+                    <p class="form-msg" id="imgMsg"></p>
+                </section>
+
+                <!-- Preview Card -->
+                <section class="card-block img-card">
+                    <h4>Image Preview</h4>
+
+                    <div class="preview-box" id="previewBox">
+                        <div class="preview-placeholder" id="previewPlaceholder">Preview Area</div>
+                        <img id="previewImg" alt="Preview" />
+                    </div>
+
+                    <div class="result-box" id="resultBox" style="display:none;">
+                        <h4 style="margin-top:14px;">Result</h4>
+                        <p class="muted" id="resultText">—</p>
+                    </div>
+                </section>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/images.js"></script>
+
+    <script>
+        if (!localStorage.getItem("token")) location.href = "main.html";
+    </script>
+
+</body>
+
+</html>

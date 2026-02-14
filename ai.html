@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense | AI Prediction</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="dashboard-body">
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="main.html" class="logo-link">EcoSense</a>
+            </div>
+
+            <nav>
+                <a class="side-link" href="dashboard.html">Dashboard</a>
+                <a class="side-link" href="sensors.html">Sensors</a>
+                <a class="side-link active" href="ai.html">AI Prediction</a>
+                <a class="side-link" href="images.html">Images</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="dashboard-content">
+
+            <h2 class="page-title">AI Prediction</h2>
+
+            <div class="card-block ai-shell">
+
+                <div class="ai-top">
+                    <div>
+                        <h4>Predict Page</h4>
+                        <p class="muted">Analyze latest sensor data and get prediction + advice.</p>
+                    </div>
+
+                    <div class="ai-actions">
+                        <button class="btn btn-solid" id="analyzeBtn">Analyze Data</button>
+                        <span class="pill" id="aiStatus">Idle</span>
+                    </div>
+                </div>
+
+                <!-- Loading bars -->
+                <div class="skeleton" id="aiSkeleton" style="display:none;">
+                    <div class="sk"></div>
+                    <div class="sk sk2"></div>
+                    <div class="sk sk3"></div>
+                </div>
+
+                <div class="card-block ai-result">
+                    <h4>Result Card</h4>
+                    <p class="muted">Prediction + Advice</p>
+
+                    <div class="ai-grid">
+                        <div class="ai-pred">
+                            <div class="ai-mini">Prediction</div>
+                            <div class="ai-text" id="predText">—</div>
+                        </div>
+
+                        <div class="ai-advice">
+                            <div class="ai-mini light">Advice</div>
+                            <div class="ai-text white" id="adviceText">—</div>
+                            <span class="pill pill-ai">AI</span>
+                        </div>
+                    </div>
+
+                    <p class="form-msg" id="aiMsg"></p>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/ai.js"></script>
+
+    <script>
+        if (!localStorage.getItem("token")) location.href = "main.html";
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSense | Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="main.html" class="logo-link">EcoSense</a>
+            </div>
+
+            <nav>
+                <a class="side-link active" href="dashboard.html">Dashboard</a>
+                <a class="side-link" href="sensors.html">Sensors</a>
+                <a class="side-link" href="ai.html">AI Prediction</a>
+                <a class="side-link" href="images.html">Images</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="dashboard-content">
+
+            <h2 class="page-title">Dashboard Overview</h2>
+
+            <section class="welcome">
+                <h3>Welcome back 👋</h3>
+                <p>Here is a quick overview of your latest agricultural data.</p>
+            </section>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Soil Moisture</h4>
+                    <div class="stat-value"><span id="soilMoistureVal">--</span>%</div>
+                    <span class="badge green" id="soilMoistureBadge">Loading</span>
+                </div>
+
+                <div class="stat-card">
+                    <h4>Soil Temperature</h4>
+                    <div class="stat-value"><span id="soilTempVal">--</span>°C</div>
+                    <span class="badge blue" id="soilTempBadge">Loading</span>
+                </div>
+
+                <div class="stat-card">
+                    <h4>Active Alerts</h4>
+                    <div class="stat-value" id="alertsVal">--</div>
+                    <span class="badge red" id="alertsBadge">Loading</span>
+                </div>
+            </div>
+
+
+            <!-- Quick Actions -->
+            <div class="card-block">
+                <h4>Quick Actions</h4>
+                <div class="quick-buttons">
+                    <button class="btn btn-solid">Upload Sensor Data</button>
+                    <button class="btn btn-outline">Predict (AI)</button>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="card-block">
+                <h4>Latest Sensor Summary</h4>
+                <canvas id="chart" height="120"></canvas>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+
+    <script>
+        // حماية الصفحة (لو مفيش تسجيل دخول)
+        if (!localStorage.getItem("token")) {
+            location.href = "main.html";
+        }
+    </script>
+
+</body>
+
+</html>

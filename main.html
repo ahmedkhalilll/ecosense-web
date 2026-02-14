@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense | Home</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg">
+    <header class="topbar">
+        <div class="brand">
+            <img class="brand-logo" src="assets/img/logo.png" alt="EcoSense" onerror="this.style.display='none'">
+            <div class="brand-text">
+                <div class="brand-name">EcoSense</div>
+                <div class="brand-sub">Smart Agriculture Monitoring Platform</div>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <a class="btn btn-ghost" href="login.html">Login</a>
+            <a class="btn btn-solid" href="register.html">Sign Up</a>
+        </div>
+
+    </header>
+
+    <main class="shell">
+        <section class="left">
+            <div class="pill"><span class="dot"></span> Sensors + AI Agriculture</div>
+
+            <h1 class="hero-title">EcoSense</h1>
+            <p class="hero-desc">
+                An intelligent platform for monitoring soil and agricultural environmental
+                conditions using Sensors and AI.
+            </p>
+
+            <div class="section-title">The user can:</div>
+            <ul class="list">
+                <li>Register an account</li>
+                <li>Connect sensor devices</li>
+                <li>View readings (Moisture – Temperature – pH – Light)</li>
+                <li>Upload images</li>
+                <li>Send data to AI and receive predictions and recommendations</li>
+            </ul>
+
+            <div class="cta">
+                <a class="btn btn-solid btn-lg" href="register.html">Get Started</a>
+                <button class="btn btn-outline btn-lg" id="googleBtn">
+                    <span class="g-dot"></span>
+                    Continue with Google
+                </button>
+            </div>
+        </section>
+
+        <section class="right">
+            <div class="card stream">
+                <div class="card-head">
+                    <div class="card-title">Live Data Stream</div>
+                    <div class="chips">
+                        <button class="chip chip-active" data-chip="realtime">Realtime</button>
+                        <button class="chip" data-chip="secure">Secure</button>
+                    </div>
+                </div>
+
+                <div class="stream-box">
+                    <div class="sensor-card">
+                        <div class="sensor-title">Soil Sensors</div>
+
+                        <div class="grid">
+                            <div class="metric">
+                                <div class="k">soilMoisture</div>
+                                <div class="v"><span id="m_moist">42</span><small>%</small></div>
+                            </div>
+                            <div class="metric">
+                                <div class="k">soilTemperature</div>
+                                <div class="v"><span id="m_temp">24</span><small>°C</small></div>
+                            </div>
+                            <div class="metric">
+                                <div class="k">soilPH</div>
+                                <div class="v"><span id="m_ph">6.8</span></div>
+                            </div>
+                            <div class="metric">
+                                <div class="k">lightIntensity</div>
+                                <div class="v"><span id="m_lux">780</span><small>lx</small></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <svg class="wires" viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
+                        <path class="wire" d="M120,160 C260,160 260,70 390,70 C500,70 510,30 560,30" />
+                        <path class="wire faint" d="M210,190 C320,190 330,130 420,130 C520,130 520,170 580,170" />
+                        <circle class="node" cx="120" cy="160" r="6" />
+                        <circle class="node" cx="390" cy="70" r="6" />
+                        <circle class="node" cx="560" cy="30" r="6" />
+                        <circle class="node" cx="580" cy="170" r="6" />
+                    </svg>
+
+                    <div class="pulse" aria-hidden="true"></div>
+                </div>
+            </div>
+
+            <div class="card ai">
+                <div class="ai-title">AI Prediction</div>
+                <div class="ai-inner">
+                    <span class="tag">Prediction + Advice</span>
+                    <div class="ai-text" id="aiText">Increase irrigation in next 24 hours</div>
+                    <div class="ai-foot">
+                        <span class="badge">AI</span>
+                        <span class="status" id="aiStatus">Active</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">© 2026 EcoSense – Smart Agriculture Monitoring Platform</footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+    <!-- <script src="assets/js/router.js"></script> -->
+
+
+    <script>
+        // لو معندكش login.html دلوقتي
+        function goLogin(e) {
+            e.preventDefault();
+            alert("Login page هنعملها بعدين ✅");
+            return false;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense | Login</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg">
+    <header class="topbar">
+        <div class="brand">
+            <img class="brand-logo" src="assets/img/logo.png" alt="EcoSense" onerror="this.style.display='none'">
+            <div class="brand-text">
+                <div class="brand-name">EcoSense</div>
+                <div class="brand-sub">Smart Agriculture Monitoring Platform</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-shell">
+        <section class="auth-card">
+            <h2>Login</h2>
+            <p class="auth-sub">Login to access your dashboard</p>
+
+            <form id="loginForm" class="form">
+                <div class="field">
+                    <label>Email</label>
+                    <input name="email" type="email" required />
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <input name="password" type="password" required />
+                </div>
+
+                <button class="btn btn-solid btn-block" type="submit">Login</button>
+
+                <div class="divider"><span>or</span></div>
+
+                <button class="btn btn-outline btn-block" type="button" id="googleLogin">
+                    Continue with Google
+                </button>
+
+                <p class="form-msg" id="loginMsg"></p>
+
+                <div class="auth-links" style="margin-top:10px;">
+                    <a href="main.html">← Back to Home</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">© 2026 EcoSense – Smart Agriculture Monitoring Platform</footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        const form = document.getElementById("loginForm");
+        const msg = document.getElementById("loginMsg");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            msg.textContent = "";
+
+            const fd = new FormData(form);
+            const payload = {
+                email: fd.get("email"),
+                password: fd.get("password")
+            };
+
+            try {
+                // ✅ Demo Login (بدون باك اند)
+localStorage.setItem("token", "demo-token-123");
+localStorage.setItem("user_email", payload.email);
+
+msg.textContent = "Login successful ✅ Redirecting...";
+setTimeout(() => location.href = "dashboard.html", 400);
+
+
+            } catch (err) {
+                msg.textContent = err.message || "Login failed ❌";
+            }
+        });
+
+        document.getElementById("googleLogin").addEventListener("click", () => {
+            alert("Google login placeholder ✅");
+        });
+    </script>
+</body>
+
+</html>

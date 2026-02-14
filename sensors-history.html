@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSense | Sensor History</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>EcoSense</h2>
+            </div>
+
+            <nav>
+                <a class="side-link" href="dashboard.html">Dashboard</a>
+                <a class="side-link active" href="sensors-history.html">Sensors</a>
+                <a class="side-link" href="ai.html">AI Prediction</a>
+                <a class="side-link" href="images.html">Images</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="dashboard-content">
+
+            <h2 class="page-title">Sensor History</h2>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <a class="tab" href="sensors.html">Latest Reading</a>
+                <a class="tab active" href="sensors-history.html">History</a>
+                <a class="tab" href="sensors-statistics.html">Statistics</a>
+                <a class="tab" href="sensors-upload.html">Upload Data</a>
+            </div>
+
+            <!-- Chart -->
+            <div class="card-block">
+                <h4>History (Table / Chart)</h4>
+                <canvas id="historyChart" height="120"></canvas>
+            </div>
+
+            <!-- Table -->
+            <div class="card-block">
+                <h4>History Table</h4>
+
+                <div class="table-wrap">
+                    <table class="nice-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>soilMoisture</th>
+                                <th>soilTemperature</th>
+                                <th>airHumidity</th>
+                                <th>lightIntensity</th>
+                                <th>soilPH</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody">
+                            <!-- JS inject rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="form-msg" id="historyMsg"></p>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/sensors-history.js"></script>
+
+    <script>
+        if (!localStorage.getItem("token")) location.href = "main.html";
+    </script>
+
+</body>
+
+</html>

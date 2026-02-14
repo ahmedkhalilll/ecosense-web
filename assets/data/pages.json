@@ -1,0 +1,57 @@
+[
+    {
+        "title": "Home",
+        "href": "main.html",
+        "auth": false
+    },
+    {
+        "title": "Register",
+        "href": "register.html",
+        "auth": false
+    },
+    {
+        "title": "Verify OTP",
+        "href": "verify.html",
+        "auth": false
+    },
+    {
+        "title": "Dashboard",
+        "href": "dashboard.html",
+        "auth": true
+    },
+    {
+        "title": "Sensors",
+        "href": "sensors.html",
+        "auth": true
+    },
+    {
+        "title": "Devices",
+        "href": "devices.html",
+        "auth": true
+    },
+    {
+        "title": "Predictions",
+        "href": "predictions.html",
+        "auth": true
+    },
+    {
+        "title": "Upload",
+        "href": "upload.html",
+        "auth": true
+    },
+    {
+        "title": "Profile",
+        "href": "profile.html",
+        "auth": true
+    },
+    {
+        "title": "Settings",
+        "href": "settings.html",
+        "auth": true
+    },
+    {
+        "title": "Support",
+        "href": "support.html",
+        "auth": false
+    }
+]

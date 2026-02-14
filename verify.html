@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense | Verify OTP</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg">
+    <header class="topbar">
+        <div class="brand">
+            <img class="brand-logo" src="assets/img/logo.png" alt="EcoSense" onerror="this.style.display='none'">
+            <div class="brand-text">
+                <div class="brand-name">EcoSense</div>
+                <div class="brand-sub">Smart Agriculture Monitoring Platform</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-shell">
+        <section class="auth-card otp-card">
+            <h2>Verify OTP</h2>
+            <p class="auth-sub">
+                Enter the 6-digit OTP code sent to your email address
+                <span class="otp-email" id="otpEmail"></span>
+            </p>
+
+            <form id="otpForm" class="form">
+                <div class="otp-inputs" id="otpInputs">
+                    <input inputmode="numeric" maxlength="1" class="otp" />
+                    <input inputmode="numeric" maxlength="1" class="otp" />
+                    <input inputmode="numeric" maxlength="1" class="otp" />
+                    <input inputmode="numeric" maxlength="1" class="otp" />
+                    <input inputmode="numeric" maxlength="1" class="otp" />
+                    <input inputmode="numeric" maxlength="1" class="otp" />
+                </div>
+
+                <button class="btn btn-solid btn-block" type="submit">Verify</button>
+
+                <div class="otp-footer">
+                    <span>Didn’t receive the code?</span>
+                    <button type="button" class="link" id="resendBtn">Resend OTP</button>
+                </div>
+
+                <p class="form-msg" id="otpMsg"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">© 2026 EcoSense – Smart Agriculture Monitoring Platform</footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+    <!-- <script src="assets/js/router.js"></script> -->
+
+    <script>
+        const otpEmailEl = document.getElementById("otpEmail");
+        const email = sessionStorage.getItem("otp_email") || "";
+        otpEmailEl.textContent = email ? `(${email})` : "";
+
+        // UX: auto move between boxes
+        const inputsWrap = document.getElementById("otpInputs");
+        const inputs = [...inputsWrap.querySelectorAll(".otp")];
+
+        inputs.forEach((inp, i) => {
+            inp.addEventListener("input", () => {
+                inp.value = inp.value.replace(/\D/g, ''); // digits only
+                if (inp.value && i < inputs.length - 1) inputs[i + 1].focus();
+            });
+            inp.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && !inp.value && i > 0) inputs[i - 1].focus();
+            });
+        });
+
+        function getOtpValue() {
+            return inputs.map(x => x.value || "").join("");
+        }
+
+        const otpForm = document.getElementById("otpForm");
+        const otpMsg = document.getElementById("otpMsg");
+
+        otpForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            otpMsg.textContent = "";
+
+            const code = getOtpValue();
+            if (code.length !== 6) {
+                otpMsg.textContent = "Enter 6 digits ❌";
+                return;
+            }
+
+            try {
+                const requestId = sessionStorage.getItem("otp_request_id") || "";
+                const res = await API.auth.verifyOtp({ requestId, email, code });
+
+                // لو backend بيرجع token بعد التحقق
+                if (res.token) localStorage.setItem("token", res.token);
+
+                otpMsg.textContent = "Verified ✅ Redirecting...";
+                // غيرها للداشبورد لما نعملها
+                setTimeout(() => location.href = "index.html", 700);
+            } catch (err) {
+                otpMsg.textContent = err.message || "OTP failed ❌";
+            }
+        });
+
+        document.getElementById("resendBtn").addEventListener("click", async () => {
+            otpMsg.textContent = "";
+            try {
+                const requestId = sessionStorage.getItem("otp_request_id") || "";
+                const res = await API.auth.resendOtp({ requestId, email });
+                if (res.requestId) sessionStorage.setItem("otp_request_id", res.requestId);
+                otpMsg.textContent = "OTP resent ✅";
+            } catch (err) {
+                otpMsg.textContent = err.message || "Resend failed ❌";
+            }
+        });
+
+        // focus first
+        inputs[0].focus();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSense | Sensors</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="main.html" class="logo-link">EcoSense</a>
+            </div>
+
+
+            <nav>
+                <a class="side-link" href="dashboard.html">Dashboard</a>
+                <a class="side-link active" href="sensors.html">Sensors</a>
+                <a class="side-link" href="ai.html">AI Prediction</a>
+                <a class="side-link" href="images.html">Images</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="dashboard-content">
+
+            <h2 class="page-title">Latest Sensor Reading</h2>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <a class="tab active" href="sensors.html">Latest Reading</a>
+                <a class="tab" href="sensors-history.html">History</a>
+                <a class="tab" href="sensors-statistics.html">Statistics</a>
+                <a class="tab" href="sensors-upload.html">Upload Data</a>
+            </div>
+
+
+            <!-- Cards -->
+            <div class="card-block">
+                <div class="card-header">
+                    <h4>Latest Reading (Cards / Chart)</h4>
+                    <div>
+                        <button class="btn btn-solid">Predict (AI)</button>
+                        <button class="btn btn-outline">Upload Data</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>soilMoisture</h4>
+                        <div class="stat-value"><span id="moistVal">--</span>%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>soilTemperature</h4>
+                        <div class="stat-value"><span id="tempVal">--</span>°C</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>airHumidity</h4>
+                        <div class="stat-value"><span id="humidityVal">--</span>%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>soilPH</h4>
+                        <div class="stat-value"><span id="phVal">--</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="card-block">
+                <h4>Chart</h4>
+                <canvas id="sensorChart" height="120"></canvas>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/sensors.js"></script>
+
+    <script>
+        // حماية الصفحة
+        if (!localStorage.getItem("token")) {
+            location.href = "main.html";
+        }
+    </script>
+
+</body>
+
+</html>

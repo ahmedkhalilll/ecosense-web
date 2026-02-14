@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense | Register</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg">
+    <header class="topbar">
+        <div class="brand">
+            <img class="brand-logo" src="assets/img/logo.png" alt="EcoSense" onerror="this.style.display='none'">
+            <div class="brand-text">
+                <div class="brand-name">EcoSense</div>
+                <div class="brand-sub">Smart Agriculture Monitoring Platform</div>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <a class="btn btn-ghost" href="login.html" onclick="return goLogin(event)">Already have an account?</a>
+        </div>
+    </header>
+
+    <main class="auth-shell">
+        <section class="auth-card">
+            <h2>Create your account</h2>
+            <p class="auth-sub">Sign up to start monitoring your agricultural data</p>
+
+            <form id="registerForm" class="form">
+                <div class="row two">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input name="firstName" type="text" required />
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input name="lastName" type="text" required />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Email</label>
+                    <input name="email" type="email" required />
+                </div>
+
+                <div class="field">
+                    <label>Phone Number</label>
+                    <input name="phone" type="tel" />
+                </div>
+
+                <div class="field">
+                    <label>Address</label>
+                    <input name="address" type="text" />
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <input name="password" type="password" minlength="6" required />
+                </div>
+
+                <div class="field">
+                    <label>Confirm Password</label>
+                    <input name="confirmPassword" type="password" minlength="6" required />
+                </div>
+
+                <button class="btn btn-solid btn-block" type="submit">Register</button>
+                <p class="form-msg" id="regMsg"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">© 2026 EcoSense – Smart Agriculture Monitoring Platform</footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+    <!-- <script src="assets/js/router.js"></script> -->
+
+    <script>
+        function goLogin(e) {
+            e.preventDefault();
+            alert("Login page هنعملها بعدين ✅");
+            return false;
+        }
+
+        // Register -> Backend -> go OTP
+        const form = document.getElementById("registerForm");
+        const msg = document.getElementById("regMsg");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            msg.textContent = "";
+
+            const fd = new FormData(form);
+            const payload = {
+                firstName: fd.get("firstName"),
+                lastName: fd.get("lastName"),
+                email: fd.get("email"),
+                phone: fd.get("phone"),
+                address: fd.get("address"),
+                password: fd.get("password"),
+                confirmPassword: fd.get("confirmPassword"),
+            };
+
+            if (payload.password !== payload.confirmPassword) {
+                msg.textContent = "Passwords do not match ❌";
+                return;
+            }
+
+            try {
+                // 1) call backend
+                // backend يقفل الحساب مؤقتًا ويبعث OTP للإيميل ويرجع requestId
+                const res = await API.auth.register(payload);
+
+                // 2) خزّن requestId/email عشان صفحة OTP
+                sessionStorage.setItem("otp_request_id", res.requestId || "");
+                sessionStorage.setItem("otp_email", payload.email);
+
+                msg.textContent = "Registered ✅ Redirecting to OTP...";
+                setTimeout(() => location.href = "verify.html", 700);
+            } catch (err) {
+                msg.textContent = err.message || "Register failed ❌";
+            }
+        });
+    </script>
+</body>
+
+</html>

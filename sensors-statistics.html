@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EcoSense | Sensors Statistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>EcoSense</h2>
+            </div>
+            <nav>
+                <a class="side-link" href="dashboard.html">Dashboard</a>
+                <a class="side-link active" href="sensors-statistics.html">Sensors</a>
+                <a class="side-link" href="ai.html">AI Prediction</a>
+                <a class="side-link" href="images.html">Images</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="dashboard-content">
+
+            <h2 class="page-title">Sensors Statistics</h2>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <a class="tab" href="sensors.html">Latest Reading</a>
+                <a class="tab" href="sensors-history.html">History</a>
+                <a class="tab active" href="sensors-statistics.html">Statistics</a>
+                <a class="tab" href="sensors-upload.html">Upload Data</a>
+            </div>
+
+            <!-- Top Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Avg Moisture</h4>
+                    <div class="stat-value"><span id="avgMoisture">--</span>%</div>
+                </div>
+
+                <div class="stat-card">
+                    <h4>Avg Temp</h4>
+                    <div class="stat-value"><span id="avgTemp">--</span>°C</div>
+                </div>
+
+                <div class="stat-card">
+                    <h4>Alerts</h4>
+                    <div class="stat-value" id="alertsCount">--</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="stats-grid">
+                <div class="card-block">
+                    <h4>Avg Moisture</h4>
+                    <canvas id="moistChart" height="120"></canvas>
+                </div>
+
+                <div class="card-block">
+                    <h4>Avg Temp</h4>
+                    <canvas id="tempChart" height="120"></canvas>
+                </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="card-block">
+                <h4>Alerts</h4>
+                <ul id="alertsList" class="alerts-list"></ul>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/sensors-statistics.js"></script>
+
+    <script>
+        if (!localStorage.getItem("token")) location.href = "main.html";
+    </script>
+
+</body>
+
+</html>
